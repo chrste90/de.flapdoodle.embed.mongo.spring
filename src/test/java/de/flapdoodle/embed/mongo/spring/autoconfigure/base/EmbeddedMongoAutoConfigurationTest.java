@@ -72,7 +72,7 @@ class EmbeddedMongoAutoConfigurationTests {
 	@Test
 	void noVersion() {
 		this.context = new AnnotationConfigApplicationContext();
-		TestPropertyValues.of("spring.data.mongodb.port=0").applyTo(this.context);
+		TestPropertyValues.of("spring.mongodb.port=0").applyTo(this.context);
 		this.context.register(MongoAutoConfiguration.class, DataMongoAutoConfiguration.class,
 			EmbeddedMongoAutoConfiguration.class);
 		assertThatThrownBy(() -> this.context.refresh()).hasRootCauseExactlyInstanceOf(IllegalStateException.class)
@@ -120,7 +120,7 @@ class EmbeddedMongoAutoConfigurationTests {
 
 	@Test
 	void specifyPortToZeroAllocateRandomPort() {
-		loadWithValidVersion("spring.data.mongodb.port=0");
+		loadWithValidVersion("spring.mongodb.port=0");
 		assertThat(this.context.getBeansOfType(MongoClient.class)).hasSize(1);
 		MongoClient client = this.context.getBean(MongoClient.class);
 		MongoProperties properties = this.context.getBean(MongoProperties.class);
@@ -131,7 +131,7 @@ class EmbeddedMongoAutoConfigurationTests {
 	@Test
 	void useSpecifiedPort() throws IOException {
 		int port = Network.freeServerPort(Network.getLocalHost());
-		loadWithValidVersion("spring.data.mongodb.port="+port);
+		loadWithValidVersion("spring.mongodb.port="+port);
 		assertThat(this.context.getBeansOfType(MongoClient.class)).hasSize(1);
 		MongoClient client = this.context.getBean(MongoClient.class);
 		MongoProperties properties = this.context.getBean(MongoProperties.class);
@@ -200,8 +200,8 @@ class EmbeddedMongoAutoConfigurationTests {
 	@Test
 	void withAuth() {
 		loadWithValidVersion(
-			"spring.data.mongodb.username=user",
-			"spring.data.mongodb.password=passwd");
+			"spring.mongodb.username=user",
+			"spring.mongodb.password=passwd");
 
 		try(MongoClient client = this.context.getBean(MongoClient.class)) {
 			ArrayList<String> collectionNames = client.getDatabase("test")
@@ -215,8 +215,8 @@ class EmbeddedMongoAutoConfigurationTests {
 	@Test
 	void mongoDb6withAuth() {
 		loadWithValidVersion(
-			"spring.data.mongodb.username=user",
-			"spring.data.mongodb.password=passwd",
+			"spring.mongodb.username=user",
+			"spring.mongodb.password=passwd",
 			"de.flapdoodle.mongodb.embedded.version=6.0.1");
 
 		try(MongoClient client = this.context.getBean(MongoClient.class)) {
@@ -230,7 +230,7 @@ class EmbeddedMongoAutoConfigurationTests {
 
 	private void assertVersionConfiguration(String configuredVersion, String expectedVersion) {
 		this.context = new AnnotationConfigApplicationContext();
-		TestPropertyValues.of("spring.data.mongodb.port=0").applyTo(this.context);
+		TestPropertyValues.of("spring.mongodb.port=0").applyTo(this.context);
 		if (configuredVersion != null) {
 			TestPropertyValues.of("de.flapdoodle.mongodb.embedded.version=" + configuredVersion).applyTo(this.context);
 		}

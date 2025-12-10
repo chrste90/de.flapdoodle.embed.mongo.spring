@@ -20,7 +20,7 @@ Per default there is just one mongodb instance running. In case you need test is
 with `@TestPropertySource` as in this example:
 
 ```java
-@DataMongoTest()
+@SpringBootTest
 @TestPropertySource(properties = "property=A")
 @ExtendWith(SpringExtension.class)
 @DirtiesContext
@@ -40,7 +40,7 @@ The tests with the same configuration will share their instance. If you want to 
 configuration you must annotate your test with `@DirtiesContext` so that this test will have his own mongodb:
 
 ```java
-@DataMongoTest()
+@SpringBootTest
 @TestPropertySource(properties = "property=A")
 @ExtendWith(SpringExtension.class)
 @DirtiesContext
@@ -63,7 +63,7 @@ any test code is executed.
 If `mongoimport` is not bundled within the mongodb version, then you have to define a tools version: 'de.flapdoodle.mongodb.embedded.tools-version'.
 
 ```java
-@DataMongoTest()
+@SpringBootTest
 @ExtendWith(SpringExtension.class)
 @Import(ImportJsonTest.Config.class)
 public class ImportJsonTest {

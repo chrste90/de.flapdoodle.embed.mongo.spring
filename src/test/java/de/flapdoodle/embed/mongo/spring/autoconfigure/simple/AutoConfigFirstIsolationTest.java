@@ -24,7 +24,7 @@ import org.bson.Document;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.boot.data.mongodb.test.autoconfigure.DataMongoTest;
+import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.data.mongodb.core.MongoTemplate;
 import org.springframework.test.annotation.DirtiesContext;
 import org.springframework.test.context.TestPropertySource;
@@ -32,7 +32,7 @@ import org.springframework.test.context.junit.jupiter.SpringExtension;
 
 import static org.assertj.core.api.Assertions.assertThat;
 
-@DataMongoTest()
+@SpringBootTest
 @TestPropertySource(properties = "property=A")
 @ExtendWith(SpringExtension.class)
 @DirtiesContext

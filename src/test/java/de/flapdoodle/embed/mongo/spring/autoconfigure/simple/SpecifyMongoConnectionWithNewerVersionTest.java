@@ -23,7 +23,7 @@ package de.flapdoodle.embed.mongo.spring.autoconfigure.simple;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.boot.data.mongodb.test.autoconfigure.DataMongoTest;
+import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.data.mongodb.core.MongoTemplate;
 import org.springframework.test.context.TestPropertySource;
 import org.springframework.test.context.junit.jupiter.SpringExtension;
@@ -32,7 +32,7 @@ import java.util.ArrayList;
 
 import static org.assertj.core.api.Assertions.assertThat;
 
-@DataMongoTest()
+@SpringBootTest
 @ExtendWith(SpringExtension.class)
 @TestPropertySource(properties = {
 	"de.flapdoodle.mongodb.embedded.version=6.0.3"
